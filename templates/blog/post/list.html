@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{%block title_block%} Blog home Page {%endblock%}
+
+{% block content %}
+
+  {% if tag %}
+    <h2>Posts tagged with "{{ tag.name }}"</h2>
+  {% endif %}
+  {% for post in posts %}
+  <div class="posts">
+
+     <a href="{{post.get_absolute_url}}" class="title">{{post.title}}</a>
+     <p id="date">&nbsp;Published on {{post.publish}} by {{post.author|title}}</p>
+     <p class="taggs">&nbsp;Tags:
+       {%for tag in post.tags.all%}
+         <a class="btn btn-success" href="{% url "blog:post_list_by_tag" tag.slug %}">{{tag.name}}</a>
+       {%if not forloop.last%}{%endif%}
+       {%endfor%}
+     </p>
+     <h7 class="paragraph">{{ post.body|markdown|truncatewords_html:200 }}</h7>
+     <h2 align="center"><a href="{{post.get_absolute_url}}" class="btn btn-primary btn-lg">Read More...</a></h2>
+
+     </div>
+
+  {%endfor%}
+  <br>
+
+  {% include "pagination.html" with page=posts %}
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{%load blog_tags%}
+{%load static%}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 ">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "css/blog.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>{%block title_block%}{%endblock%}</title>
+  </head>
+    <body>
+      <section>
+      <nav class="navbar navbar-default navbar-inverse">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">Vinay Kalyankar's Blog</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li> <a href="/" class="current">Home</a> </li>
+            <li> <a href="/AboutMe" >About Me</a> </li>
+          </ul>
+
+        </div>
+      </nav>
+      <section>
+        <div class="content" >
+              {%block content%}{%endblock%}
+        </div>
+
+
+
+  <div class="sidebar">
+    <h2>Vinay Kalyankar's blog</h2>
+    <p>The total number of published posts upto today: <span id='pcount'>{%total_posts%}</span>  </p>
+    <h3>Latest Posts: </h3>{%show_latest_posts %}
+    <h3>Most Commented Posts: </h3>
+    {%get_most_commented_posts as most_commented_posts%}
+    <ul>
+      {%for post in most_commented_posts%}
+        <li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li>
+      {%endfor%}
+    </ul>
+  </div>
+  <br />
+</section>
+  <footer id="footer" align="center">
+    <a href="https://www.facebook.com/kalyankarvinay" class="fa fa-facebook" target="_blank"></a>
+    <a href="https://twitter.com/kalyankar_vinay" class="fa fa-twitter" target="_blank"></a>
+    <a href="#" class="fa fa-linkedin" target="_blank"></a>
+    <a href="https://www.instagram.com/kalyankarvinay" class="fa fa-instagram"></a>
+    <a href="https://github.com/Vinaykalyankar" class="fa fa-github" target="_blank"></a>
+  </footer>
+
+
+    </body>
+  </html>
